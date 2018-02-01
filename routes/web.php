@@ -16,4 +16,17 @@
 // });
 
 
-Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/app', 'SpaController@index');
+
+    Route::get('/app/{any}', 'SpaController@index')->where('any', '.*');
+});
+
+
+
